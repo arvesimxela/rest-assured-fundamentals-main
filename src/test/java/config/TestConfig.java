@@ -9,6 +9,6 @@ public class TestConfig {
     public static void setup(){
         RestAssured.baseURI = "https://videogamedb.uk";
         RestAssured.basePath = "/api/v2/";
-        RestAssured.port = 442;
+        //RestAssured.port = 442;
     }
 }
