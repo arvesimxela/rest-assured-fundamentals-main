@@ -10,7 +10,7 @@ public class MyFirstTest extends TestConfig{
         given()
                 .log().all()
         .when()
-                .get("/videogame")// /videogame if to extend TestConfig
+                .get("/videogame")
         .then()
                 .log().all();
 
