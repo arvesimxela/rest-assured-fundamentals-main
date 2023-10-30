@@ -6,7 +6,7 @@ import static io.restassured.RestAssured.*;
 public class MyFirstTest extends TestConfig{
 
     @Test
-    public void myFirstTest() {
+    public void myFirstTest()  {
         given()
                 .log().all()
         .when()
