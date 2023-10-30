@@ -11,5 +11,4 @@ public class TestConfig {
         RestAssured.basePath = "/api/v2/";
         RestAssured.port = 442;
     }
-
 }
