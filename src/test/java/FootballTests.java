@@ -1,4 +1,6 @@
 import config.FootballConfig;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
@@ -48,12 +50,41 @@ public class FootballTests extends FootballConfig {
     }
 
     @Test
-    public void getAllTeamData(){
+    public void getExtractAllTeamData(){
         String responseBody = get("teams/57").asString();
         System.out.println(responseBody);
+    }
+
+    @Test
+    public void getExtractAllTeamData_MakeCheckFirst(){
+        Response response =
+                given()
+                .when()
+                        .get("teams/57")
+                .then()
+                        .contentType(ContentType.JSON)
+                        .extract().response();
+
+        String jsonResponseAsString = response.asString();
+        System.out.println(jsonResponseAsString);
 
     }
 
+    @Test
+    public void  extractHeaders(){
+        Response response =
+                get("teams/57")
+                        .then()
+                        .extract().response();
 
+        String contentTypeHeader = response.getContentType();
+        System.out.println(contentTypeHeader);
+
+        String apiVersionHeader = response.getHeader("X-API-Version");
+        System.out.println(apiVersionHeader);
+
+
+
+    }
 
 }
