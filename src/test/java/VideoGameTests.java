@@ -1,5 +1,6 @@
 import config.VideoGameConfig;
 import config.VideoGameEndpoints;
+import objects.VideoGame;
 import org.junit.Test;
 
 
@@ -81,4 +82,14 @@ public class VideoGameTests extends VideoGameConfig {
                 .get(VideoGameEndpoints.SINGLE_VIDEO_GAME)
         .then();
     }
-}
+
+    @Test
+    public void testVideoGameSerializationByJSON(){
+        VideoGame videoGame = new VideoGame("Shooter","Quake","Mature","1995-05-01",99);
+
+        given()
+                .body(videoGame)
+        .when()
+                .post(VideoGameEndpoints.ALL_VIDEO_GAMES)
+        .then();
+}}

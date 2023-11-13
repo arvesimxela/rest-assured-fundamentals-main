@@ -3,6 +3,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 //import static java.lang.reflect.Array.get;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -82,9 +84,28 @@ public class FootballTests extends FootballConfig {
 
         String apiVersionHeader = response.getHeader("X-API-Version");
         System.out.println(apiVersionHeader);
+    }
 
+    @Test
+    public void extractFirstTeamName(){
+        String firstTeamName = get("competitions/2021/teams/")
+                .jsonPath()
+                .getString("teams.name[0]");
+        System.out.println(firstTeamName);
+    }
 
+    @Test
+    public void extractAllTeamsNames(){
+        Response response =
+                get("competitions/2021/teams")
+                .then()
+                .extract().response();
 
+        List<String> teamNames = response.path("teams.squad.name[0]"); //why should we specify the 1st element here considering that all works with no 1st element specified for teams.name?
+
+        for(String teamName: teamNames) {
+            System.out.println(teamName);
+        }
     }
 
 }
